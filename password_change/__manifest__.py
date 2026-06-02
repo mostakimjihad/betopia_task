@@ -16,7 +16,7 @@
     ],
     'assets': {
        'web.assets_backend': [
-          'betopia_task/static/src/js/user_menu.js',
+          'password_change/static/src/js/user_menu.js',
        ]
     },
     'installable': True,

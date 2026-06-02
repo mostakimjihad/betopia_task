@@ -2,21 +2,20 @@
 import { registry } from "@web/core/registry";
 import { browser } from "@web/core/browser/browser";
 import { _t } from "@web/core/l10n/translation";
-function debugItem(env) {
-  const urlParams = new
-         URLSearchParams(window.location.search);
-  urlParams.set('debug', '1');
-  const debugURL = window.location.pathname + '?' +
-          urlParams.toString();
+function changePass(env) {
   return {
-      id: "debug",
+      id: "Change Password",
       type: "item",
-      description: _t("Developer Mode"),
-      href: debugURL,
-      callback: () => {
-          browser.open(debugURL, "_self");
-      },
+      description: _t("Change Password"),
+      callback: async () => {
+        await env.services.action.doAction({
+            type: "ir.actions.act_window",
+            res_model: "change.password.own",
+            views: [[false, "form"]],
+            target: "new",
+        });
+     },
       sequence: 60,
   };
 }
-registry.category("user_menuitems").add("debug", debugItem)
+registry.category("user_menuitems").add("debug", changePass)
