@@ -8,13 +8,12 @@ function changePass(env) {
       type: "item",
       description: _t("Change Password"),
       callback: async () => {
-        await env.services.action.doAction({
-            type: "ir.actions.act_window",
-            res_model: "change.password.own",
-            views: [[false, "form"]],
-            target: "new",
-        });
-     },
+        await env.services.orm.call(
+            "res.users",
+            "preference_change_password",
+            [[session.uid]]
+        );
+    },
       sequence: 60,
   };
 }
